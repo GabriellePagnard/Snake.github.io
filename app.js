@@ -20,6 +20,11 @@ const app = {
         ctx.fillStyle = "white";
         ctx.strokeStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        /*ctx.font = "20px Arial";
+        ctx.fillStyle = "black";
+        ctx.fillText("Score: " + score, 10, 30);*/
+
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
     },
 
@@ -45,13 +50,19 @@ const app = {
 
         const serpentMangePomme = snake[0].x === pommeX && snake[0].y === pommeY;  // Vérifi si la tête du serpent est sur la pomme
 
-        if(serpentMangePomme) {
-            app.creerPomme();            
-        }else {
+        if (serpentMangePomme) {
+            score += 10;
+            //document.getElementById('score').innerHTML = score;
+            const scoreEl = document.getElementById('score');
+            if (scoreEl) {
+                scoreEl.innerHTML = score;
+            }
+            app.creerPomme();
+        } else {
             snake.pop();
         }
 
-        
+
     },
 
     changerDirection(event) {
@@ -97,8 +108,11 @@ const app = {
         // PommeX
         pommeX = 0;
 
-         // PommeY
-         pommeY = 0;
+        // PommeY
+        pommeY = 0;
+
+        // Score
+        score = 0;
 
         snake = [{ x: 140, y: 150 }, { x: 130, y: 150 }, { x: 120, y: 150 }, { x: 110, y: 150 }];
     },
@@ -117,7 +131,7 @@ const app = {
 
             app.serpentSurPomme = part.x == pommeX && part.y == pommeY;
 
-            if(app.serpentSurPomme) {
+            if (app.serpentSurPomme) {
                 app.creerPomme();
             }
         })
@@ -143,5 +157,3 @@ const app = {
 }
 
 app.init();
-
-//test

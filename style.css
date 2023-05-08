@@ -2,11 +2,35 @@ body {
     margin: 0;
     padding: 0;
     background: #3b1f46;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #canvas {
+   margin-top: 50%;
+}
+
+#container {
+    position: relative;
+  }
+
+  p {
     position: absolute;
-    top: 50%;
+    align-content: center;
+    margin-top: 40%;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+#score {
+    position: absolute;
+    align-items: center;
+    margin-top: 40%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
 }
