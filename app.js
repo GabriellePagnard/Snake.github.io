@@ -5,8 +5,9 @@ const app = {
         setTimeout(function () {
 
             app.nettoieCanvas();
+            app.dessinePomme()
             app.faireAvancerSerpent();
-
+            
             app.dessineLeSerpent();
 
             // recursion
@@ -84,11 +85,47 @@ const app = {
         // Vitesse sur Y
         vy = 0;
 
+        // PommeX
+        pommeX = 0;
+
+         // PommeY
+         pommeY = 0;
+
         snake = [{ x: 140, y: 150 }, { x: 130, y: 150 }, { x: 120, y: 150 }, { x: 110, y: 150 }];
+    },
+
+    random() {
+
+        return Math.round((Math.random() * 290) / 10) * 10;
+    },
+
+    creerPomme() {
+
+        pommeX = app.random();
+        pommeY = app.random();
+
+        snake.forEach(part => {
+
+            app.serpentSurPomme = part.x == pommeX && part.y == pommeY;
+
+            if(app.serpentSurPomme) {
+                app.creerPomme();
+            }
+        })
+    },
+
+    dessinePomme() {
+        ctx.fillStyle = 'red';
+        ctx.strokeStyle = 'darkred';
+        ctx.beginPath();
+        ctx.arc(pommeX + 5, pommeY + 5, 5, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
     },
 
     init() {
         app.vitesse();
+        app.creerPomme();
         app.animation();
         app.dessineLeSerpent();
         app.handleKeydown();
