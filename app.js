@@ -7,7 +7,7 @@ const app = {
             app.nettoieCanvas();
             app.dessinePomme()
             app.faireAvancerSerpent();
-            
+
             app.dessineLeSerpent();
 
             // recursion
@@ -134,3 +134,5 @@ const app = {
 }
 
 app.init();
+
+//test
