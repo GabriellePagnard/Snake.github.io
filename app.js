@@ -42,7 +42,16 @@ const app = {
 
         const head = { x: snake[0].x + vx, y: snake[0].y + vy };
         snake.unshift(head);
-        snake.pop();
+
+        const serpentMangePomme = snake[0].x === pommeX && snake[0].y === pommeY;  // Vérifi si la tête du serpent est sur la pomme
+
+        if(serpentMangePomme) {
+            app.creerPomme();            
+        }else {
+            snake.pop();
+        }
+
+        
     },
 
     changerDirection(event) {
