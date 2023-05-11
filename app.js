@@ -66,6 +66,7 @@ const app = {
         }
 
         if (head.x < 0 || head.x > canvas.width - 10 || head.y < 0 || head.y > canvas.height - 10) {
+            cancelAnimationFrame(animationId);
             app.finDuJeu();
             return;
         }
