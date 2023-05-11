@@ -6,10 +6,11 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-family: sans-serif;
 }
 
 #canvas {
-   margin-top: 50%;
+   margin-top: 55%;
 }
 
 #container {
@@ -21,7 +22,7 @@ body {
     align-content: center;
     margin-top: 40%;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
   }
 
@@ -29,8 +30,8 @@ body {
     position: absolute;
     align-items: center;
     margin-top: 40%;
-    left: 50%;
+    left: 75%;
     color: white;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
 }

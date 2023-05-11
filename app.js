@@ -7,6 +7,9 @@ const app = {
             app.nettoieCanvas();
             app.dessinePomme()
             app.faireAvancerSerpent();
+            if(app.finDuJeu()){
+                return;
+            }
 
             app.dessineLeSerpent();
 
@@ -62,7 +65,10 @@ const app = {
             snake.pop();
         }
 
-
+        if (head.x < 0 || head.x > canvas.width - 10 || head.y < 0 || head.y > canvas.height - 10) {
+            app.finDuJeu();
+            return;
+        }
     },
 
     changerDirection(event) {
@@ -144,6 +150,17 @@ const app = {
         ctx.arc(pommeX + 5, pommeY + 5, 5, 0, 2 * Math.PI);
         ctx.fill();
         ctx.stroke();
+    },
+
+    finDuJeu() {
+        let snakeSansTete = snake.slice(1,-1);
+        let mordu = false;
+        snakeSansTete.forEach(morceau => {
+            if(morceau.x === snake[0].x && morceau.y === snake[0].y) {
+                mordu = true;
+            }
+        })
+        return mordu;
     },
 
     init() {
