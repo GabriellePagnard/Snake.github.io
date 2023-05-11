@@ -1,33 +1,32 @@
 const app = {
 
+    vitesse: 100,
+    paused: false,
+
     animation() {
-
-        setTimeout(function () {
-
+        if (app.paused) {
+            return;
+        }
+        setTimeout(() => {
             app.nettoieCanvas();
             app.dessinePomme()
             app.faireAvancerSerpent();
-            if(app.finDuJeu()){
+            if (app.finDuJeu()) {
                 return;
             }
-
             app.dessineLeSerpent();
-
             // recursion
             app.animation();
-
-        }, 100); // vitesse du serpent (plus le chiffre est élevé, plus le serpent est lent)
+        }, app.vitesse);
     },
+
+    /*}, 100); // vitesse du serpent (plus le chiffre est élevé, plus le serpent est lent)
+},*/
 
     nettoieCanvas() {
         ctx.fillStyle = "white";
         ctx.strokeStyle = "black";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        /*ctx.font = "20px Arial";
-        ctx.fillStyle = "black";
-        ctx.fillText("Score: " + score, 10, 30);*/
-
         ctx.strokeRect(0, 0, canvas.width, canvas.height);
     },
 
@@ -61,6 +60,7 @@ const app = {
                 scoreEl.innerHTML = score;
             }
             app.creerPomme();
+            app.vitesse -= 5; // Permet d'augmenter la vitesse du serpent automatiquement plus il mange de pommes
         } else {
             snake.pop();
         }
@@ -100,7 +100,7 @@ const app = {
         document.addEventListener('keydown', app.changerDirection);
     },
 
-    vitesse() {
+    initialiseJeu() {
         canvas = document.getElementById('canvas');
         ctx = canvas.getContext('2d');
 
@@ -154,22 +154,33 @@ const app = {
     },
 
     finDuJeu() {
-        let snakeSansTete = snake.slice(1,-1);
+        let snakeSansTete = snake.slice(1, -1);
         let mordu = false;
         snakeSansTete.forEach(morceau => {
-            if(morceau.x === snake[0].x && morceau.y === snake[0].y) {
+            if (morceau.x === snake[0].x && morceau.y === snake[0].y) {
                 mordu = true;
             }
         })
         return mordu;
     },
 
+    togglePause() {
+        this.paused = !this.paused;
+        if (this.paused) {
+            cancelAnimationFrame(this.animationId);
+        } else {
+            this.animationId = requestAnimationFrame(this.animation.bind(this));
+        }
+    },
+
     init() {
-        app.vitesse();
+        app.initialiseJeu();
         app.creerPomme();
         app.animation();
         app.dessineLeSerpent();
         app.handleKeydown();
+        const pauseButton = document.getElementById('pause-button');
+        pauseButton.addEventListener('click', this.togglePause.bind(this));
     }
 
 }
