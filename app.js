@@ -1,7 +1,8 @@
 const app = {
 
-    vitesse: 100,
+    vitesse: 200,
     paused: false,
+    animationId: null,
 
     animation() {
         if (app.paused) {
@@ -12,6 +13,8 @@ const app = {
             app.dessinePomme()
             app.faireAvancerSerpent();
             if (app.finDuJeu()) {
+                console.log('3')
+                app.afficherGameOver(score);
                 return;
             }
             app.dessineLeSerpent();
@@ -19,9 +22,6 @@ const app = {
             app.animation();
         }, app.vitesse);
     },
-
-    /*}, 100); // vitesse du serpent (plus le chiffre est élevé, plus le serpent est lent)
-},*/
 
     nettoieCanvas() {
         ctx.fillStyle = "white";
@@ -31,7 +31,6 @@ const app = {
     },
 
     dessineLesMorceaux(morceau) {
-
         ctx.fillStyle = "#00a30e";
         ctx.strokeStyle = "#035811";
         ctx.fillRect(morceau.x, morceau.y, 10, 10);
@@ -45,16 +44,17 @@ const app = {
         })
     },
 
-    faireAvancerSerpent() {
 
+
+    faireAvancerSerpent() {
         const head = { x: snake[0].x + vx, y: snake[0].y + vy };
         snake.unshift(head);
+
 
         const serpentMangePomme = snake[0].x === pommeX && snake[0].y === pommeY;  // Vérifi si la tête du serpent est sur la pomme
 
         if (serpentMangePomme) {
             score += 10;
-            //document.getElementById('score').innerHTML = score;
             const scoreEl = document.getElementById('score');
             if (scoreEl) {
                 scoreEl.innerHTML = score;
@@ -65,11 +65,6 @@ const app = {
             snake.pop();
         }
 
-        if (head.x < 0 || head.x > canvas.width - 10 || head.y < 0 || head.y > canvas.height - 10) {
-            cancelAnimationFrame(animationId);
-            app.finDuJeu();
-            return;
-        }
     },
 
     changerDirection(event) {
@@ -152,8 +147,57 @@ const app = {
         ctx.fill();
         ctx.stroke();
     },
+    /*ici*/
+    // Fonction pour afficher la fenêtre pop-up "Game Over"
+    afficherGameOver(score) {
+        // Création de la fenêtre pop-up
+        const popup = document.createElement('div');
+        popup.classList.add('popup');
+
+        // Contenu de la fenêtre pop-up
+        const message = document.createElement('h2');
+        message.textContent = 'Game Over !';
+        popup.appendChild(message);
+
+        const scoreText = document.createElement('h3');
+        scoreText.textContent = 'Votre Score : ' + score + ' ' + 'Bravo !';
+        popup.appendChild(scoreText);
+
+        const btnRestart = document.createElement('button');
+        btnRestart.textContent = 'Rejouer';
+        btnRestart.addEventListener('click', function () {
+            // Action à effectuer lors du clic sur le bouton "Rejouer"
+
+            location.reload();
+
+        });
+        popup.appendChild(btnRestart);
+
+        const btnQuit = document.createElement('button');
+        btnQuit.textContent = 'Quitter';
+        btnQuit.addEventListener('click', function () {
+            // Action à effectuer lors du clic sur le bouton "Quitter"
+
+            app.fermerPopup();
+        });
+        popup.appendChild(btnQuit);
+
+        // Ajout de la fenêtre pop-up au document
+        document.body.appendChild(popup);
+
+        
+    },
+
+    // Fonction pour fermer la fenêtre pop-up
+    fermerPopup() {
+        const popup = document.querySelector('.popup');
+        document.body.removeChild(popup);
+    },
+
+
 
     finDuJeu() {
+
         let snakeSansTete = snake.slice(1, -1);
         let mordu = false;
         snakeSansTete.forEach(morceau => {
@@ -161,15 +205,29 @@ const app = {
                 mordu = true;
             }
         })
-        return mordu;
+
+        const toucheMurGauche = snake[0].x < -1;
+        const toucheMurDroite = snake[0].x > canvas.width - 10;
+        const toucheMurTop = snake[0].y < -1;
+        const toucheMurBottom = snake[0].y > canvas.height - 10;
+
+        let gameOver = false;
+
+        if (mordu || toucheMurGauche || toucheMurDroite || toucheMurTop || toucheMurBottom) {
+            console.log('5')
+            gameOver = true;
+        }
+
+
+        return gameOver;
     },
 
     togglePause() {
-        this.paused = !this.paused;
-        if (this.paused) {
-            cancelAnimationFrame(this.animationId);
+        app.paused = !app.paused;
+        if (app.paused) {
+            cancelAnimationFrame(app.animationId);
         } else {
-            this.animationId = requestAnimationFrame(this.animation.bind(this));
+            app.animationId = requestAnimationFrame(app.animation.bind(this));
         }
     },
 
@@ -180,9 +238,8 @@ const app = {
         app.dessineLeSerpent();
         app.handleKeydown();
         const pauseButton = document.getElementById('pause-button');
-        pauseButton.addEventListener('click', this.togglePause.bind(this));
-    }
-
+        pauseButton.addEventListener('click', app.togglePause.bind(app));
+    },
 }
 
 app.init();
