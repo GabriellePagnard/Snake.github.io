@@ -10,7 +10,7 @@ body {
 }
 
 #canvas {
-  margin-top: 25%;
+  margin-top: 40%;
   border: 3px solid rgb(177, 109, 255);
 }
 
@@ -21,7 +21,7 @@ body {
 p {
   position: absolute;
   align-content: center;
-  margin-top: 5%;
+  margin-top: 20%;
   color: rgb(233, 201, 253);
   font-size: 30px;
   font-weight: bold;
@@ -32,7 +32,7 @@ p {
 #score {
   position: absolute;
   align-items: center;
-  margin-top: 5%;
+  margin-top: 20%;
   left: 75%;
   color: rgb(175, 109, 212);
   font-size: 30px;
