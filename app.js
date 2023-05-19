@@ -147,8 +147,8 @@ const app = {
         ctx.fill();
         ctx.stroke();
     },
-    /*ici*/
-    // Fonction pour afficher la fenêtre pop-up "Game Over"
+    
+
     afficherGameOver(score) {
         // Création de la fenêtre pop-up
         const popup = document.createElement('div');
@@ -169,6 +169,7 @@ const app = {
             // Action à effectuer lors du clic sur le bouton "Rejouer"
 
             location.reload();
+            app.init();
 
         });
         popup.appendChild(btnRestart);
@@ -193,8 +194,6 @@ const app = {
         const popup = document.querySelector('.popup');
         document.body.removeChild(popup);
     },
-
-
 
     finDuJeu() {
 
@@ -231,6 +230,42 @@ const app = {
         }
     },
 
+    demarrageDuJeu() {
+        // Création de la fenêtre pop-up
+        const beguinPopup = document.createElement('div');
+        beguinPopup.classList.add('beguinPopup');
+
+        // Contenu de la fenêtre pop-up
+        const messageDemarrage = document.createElement('h4');
+        messageDemarrage.textContent = 'Lancer le jeu';
+        beguinPopup.appendChild(messageDemarrage);
+
+        const btnStart = document.createElement('button');
+        btnStart.textContent = 'Jouer';
+        btnStart.addEventListener('click', function () {
+            // Action à effectuer lors du clic sur le bouton "Jouer"
+
+            app.init();
+            app.fermerBeguinPopup();
+
+        });
+        beguinPopup.appendChild(btnStart);
+
+        // Ajout de la fenêtre pop-up au document
+        document.body.appendChild(beguinPopup);
+
+        
+    },
+
+    // Fonction pour fermer la fenêtre pop-up
+    fermerBeguinPopup() {
+        const beguinPopup = document.querySelector('.beguinPopup');
+        document.body.removeChild(beguinPopup);
+    },
+
+
+
+
     init() {
         app.initialiseJeu();
         app.creerPomme();
@@ -242,4 +277,4 @@ const app = {
     },
 }
 
-app.init();
+app.demarrageDuJeu()
