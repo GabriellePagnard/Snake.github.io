@@ -1,31 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
+    <!-- Métadonnées du document -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
+
+    <!-- Favicon pour l'onglet du navigateur -->
     <link rel="icon" type="image/x-icon" href="./images/favicon_ico32.ico">
+
+    <!-- Lien vers la feuille de style CSS -->
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
+    <!-- Conteneur principal pour l'image du logo du jeu -->
     <div class="container">
         <img src="./images/133461.jpg" alt="Logo du jeu Snake">
     </div>
+
+    <!-- Conteneur pour le score et le canvas du jeu -->
     <div id="container">
         <p>Votre Score :</p>
         <div id="score"></div>
         <canvas id="canvas" width="300" height="300"></canvas>
     </div>
+
+    <!-- Conteneur pour le bouton de pause -->
     <div class="button-container">
         <div id="pause-container">
             <button id="pause-button">Pause</button>
         </div>
     </div>
+
+    <!-- Inclusion du script JavaScript pour la logique du jeu -->
     <script src="app.js"></script>
 </body>
-
 </html>
