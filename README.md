@@ -55,10 +55,10 @@ Pour jouer : [SNAKE 🐍](https://gabriellepagnard.github.io/Snake.github.io/)
 
 ## 📂 Fichiers du Projet
 
-- index.html : Structure HTML de la page web.   
-- style.css : Styles CSS pour l'apparence de l'application   
-- app.js : Script JavaScript pour la logique de recherche, la gestion des résultats et les interactions avec l'API    
-- images/ : Dossier contenant les images et les icônes (y compris le favicon et les captures d'écran)   
+- index.html : Structure du jeu   
+- style.css : Feuille de style personnalisée   
+- app.js : Script pour la logique du jeu    
+- images/ : Contient les images utilisées dans le projet   
 
 <br>
 <br>
@@ -66,7 +66,7 @@ Pour jouer : [SNAKE 🐍](https://gabriellepagnard.github.io/Snake.github.io/)
 
 ## 🛠️ Installation et Utilisation
 
-Pour démarrer avec Calculatrice, suivez ces étapes simples :   
+Pour démarrer avec Snake, suivez ces étapes simples :   
 
 ➡️ Clonez le Répertoire :   
 
