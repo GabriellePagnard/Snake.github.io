@@ -38,7 +38,7 @@ Voici à quoi ressemble l'application :
 
 ## 🌐 Lien direct
 
-Pour jouer : [SNAKE 🐍](https://gabriellepagnard.github.io/Snake.github.io/)   
+Pour jouer : [SNAKE 🐍](https://gabriellepagnard.github.io/Snake/)   
 
 
 <br>
